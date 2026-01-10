@@ -6,13 +6,17 @@ import android.media.MediaPlayer
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -172,13 +176,44 @@ fun MusicAppScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable {
+
                             val index = songs.indexOf(song)
                             playSongAt(index)
                         }
                         .padding(16.dp)
                 ) {
-                    Text(text = song.title, style = MaterialTheme.typography.titleMedium)
-                    Text(text = song.artist, style = MaterialTheme.typography.bodyMedium)
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+
+                    ){
+                        Box(
+                            modifier = Modifier
+                                .size(60.dp)
+                                .background(Color.Gray, shape = RoundedCornerShape(20.dp))
+                        ){
+                            Text(if (song.isPlaying) "▶️" else "🎵", modifier = Modifier.align(Alignment.Center))
+                        }
+                        Column(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(start = 10.dp)
+                        ) {
+                            Text(
+                                text = if (song.title.length > 25)
+                                    song.title.substring(0, 25) + "..."
+                                else
+                                    song.title,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+
+                            Text(
+                                text = song.artist,
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
+
+                    }
                 }
                 Divider()
             }
