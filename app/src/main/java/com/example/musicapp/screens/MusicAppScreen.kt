@@ -25,8 +25,6 @@ import com.example.musicapp.loadSongs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-// hello
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MusicAppScreen() {
@@ -77,7 +75,7 @@ fun MusicAppScreen() {
             duration = it.duration
             isPlaying = true
             it.start()
-            nowPlayingTitle = song.title
+            nowPlayingTitle = if (song.title.length > 25) song.title.substring(0, 25) + "..." else song.title
             currentSongIndex = index
 
             coroutineScope.launch {
