@@ -106,10 +106,10 @@ fun MusicAppScreen() {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 12.dp, vertical = 8.dp), // FIXED: Changed 'symmetric' to 'horizontal'
+                            .padding(horizontal = 12.dp, vertical = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        // Circular Album Art with integrated progress border
+                        // Circular Album Art with integrated progress border 
                         Box(
                             modifier = Modifier
                                 .size(48.dp)
